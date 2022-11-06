@@ -22,6 +22,7 @@ const Experts = () => {
       <h3 className="text-center font-bold text-4xl text-blue-600">
         Our Experts
       </h3>
+
       <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-3 mt-3">
         {experts.map((expert) => (
           <Expert key={expert.id} expert={expert}></Expert>

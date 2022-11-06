@@ -4,7 +4,7 @@ const service = ({ service }) => {
   const { name, img, description, price } = service;
   return (
     <div className="border rounded-lg p-3">
-      <img className="w-full" src={img} alt="" />
+      <img className="w-full rounded-lg" src={img} alt="" />
 
       <h3 className="text-xl font-semibold">{name}</h3>
       <h3 className="text-lg font-semibold"> price:${price}</h3>

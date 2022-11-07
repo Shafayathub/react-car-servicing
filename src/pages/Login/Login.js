@@ -15,7 +15,7 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit} className="text-gray-600 body-font">
       <div className="container px-5 py-14 mx-auto flex flex-wrap items-center">
-        <img className="mx-auto w-96" src={login} alt="" />
+        <img className="mx-auto w-72 lg:w-96" src={login} alt="" />
 
         <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-7 md:mt-0">
           <h2 className="text-gray-900 text-lg font-medium title-font mb-5">

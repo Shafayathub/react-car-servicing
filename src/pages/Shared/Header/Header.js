@@ -4,7 +4,7 @@ import logo from '../../../images/logo.png';
 
 const Header = () => {
   return (
-    <header className="bg-blue-500 text-gray-200 body-font sticky top-0">
+    <header className="bg-blue-500 text-gray-200 body-font lg:sticky lg:top-0">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link
           className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"

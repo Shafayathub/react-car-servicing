@@ -15,22 +15,19 @@ const Header = () => {
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           <Link
             className="mr-5 hover:text-gray-900"
-            to={{ pathname: '/home', hash: 'services' }}
+            to={{ pathname: '/home', hash: '#services' }}
           >
             Services
           </Link>
 
           <Link
             className="mr-5 hover:text-gray-900"
-            to={{ pathname: '/home', hash: 'experts' }}
+            to={{ pathname: '/home', hash: '#experts' }}
           >
             Experts
           </Link>
           <Link className="mr-5 hover:text-gray-900" to="/about">
             About
-          </Link>
-          <Link className="mr-5 hover:text-gray-900" to="/">
-            Fourth Link
           </Link>
         </nav>
         <Link

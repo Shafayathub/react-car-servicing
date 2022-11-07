@@ -1,16 +1,36 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import login from '../../images/Developer-activity.gif';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const Register = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const navigate = useNavigate();
+
   const emailRef = useRef('');
   const passwordRef = useRef('');
+  const confirmPasswordRef = useRef('');
+
+  if (user) {
+    navigate('/home');
+  }
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    const confirmPassword = confirmPasswordRef.current.value;
+    console.log(password, confirmPassword);
+    if (confirmPassword === password) {
+      createUserWithEmailAndPassword(email, password);
+    }
   };
   return (
     <form onSubmit={handleSubmit} className="text-gray-600 body-font">
@@ -21,18 +41,22 @@ const Register = () => {
           <h2 className="text-gray-900 text-lg font-medium title-font mb-5">
             Register
           </h2>
-          <div className="relative mb-4">
-            <label htmlFor="full-name" class="leading-7 text-sm text-gray-600">
+          {/* <div className="relative mb-4">
+            <label
+              htmlFor="full-name"
+              className="leading-7 text-sm text-gray-600"
+            >
               Full Name
             </label>
             <input
-              type="text"
+              ref={nameRef}
+              type=""
               id="full-name"
               name="full-name"
-              class="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              className="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               required
             />
-          </div>
+          </div> */}
           <div className="relative mb-4">
             <label htmlFor="email" className="leading-7 text-sm text-gray-600">
               Email
@@ -53,7 +77,6 @@ const Register = () => {
             <input
               ref={passwordRef}
               type="password"
-              id="password"
               name="password"
               className="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               required
@@ -62,9 +85,8 @@ const Register = () => {
               Confirm password
             </label>
             <input
-              ref={passwordRef}
+              ref={confirmPasswordRef}
               type="password"
-              id="password"
               name="password"
               className="w-full bg-white rounded border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               required
@@ -83,12 +105,13 @@ const Register = () => {
 
           <input
             type="submit"
-            value="Sign in"
+            value="Register"
             className="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
           />
           <p className="text-xs text-gray-500 mt-3">
             <small>We care about your privacy.</small>
           </p>
+          <p className="text-red-600">{error && error?.code}</p>
         </div>
       </div>
     </form>

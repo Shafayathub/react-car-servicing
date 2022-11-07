@@ -1,16 +1,25 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 import login from '../../images/Login.gif';
 
 const Login = () => {
+  const [signInWithEmailAndPassword, user, error] =
+    useSignInWithEmailAndPassword(auth);
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate('/');
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
   };
   return (
     <form onSubmit={handleSubmit} className="text-gray-600 body-font">
@@ -67,6 +76,7 @@ const Login = () => {
           <p className="text-xs text-gray-500 mt-3">
             <small>We care about your privacy.</small>
           </p>
+          <p className="text-red-600">{error && error?.message}</p>
         </div>
       </div>
     </form>

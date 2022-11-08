@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import login from '../../images/Developer-activity.gif';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import SocialLogin from '../Login/SocialLogin/SocialLogin';
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -34,7 +35,7 @@ const Register = () => {
   };
   return (
     <form onSubmit={handleSubmit} className="text-gray-600 body-font">
-      <div className="container px-5 py-8 mx-auto flex flex-wrap items-center">
+      <div className="container px-5 py-6 mx-auto flex flex-wrap items-center">
         <img className="mx-auto w-72 lg:w-96" src={login} alt="" />
 
         <div className="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-7 md:mt-0">
@@ -108,6 +109,7 @@ const Register = () => {
             value="Register"
             className="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
           />
+          <SocialLogin></SocialLogin>
           <p className="text-xs text-gray-500 mt-3">
             <small>We care about your privacy.</small>
           </p>

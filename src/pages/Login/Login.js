@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import login from '../../images/Login.gif';
+import SocialLogin from './SocialLogin/SocialLogin';
 
 const Login = () => {
   const [signInWithEmailAndPassword, user, error] =
@@ -73,6 +74,7 @@ const Login = () => {
             value="Sign in"
             className="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
           />
+          <SocialLogin></SocialLogin>
           <p className="text-xs text-gray-500 mt-3">
             <small>We care about your privacy.</small>
           </p>

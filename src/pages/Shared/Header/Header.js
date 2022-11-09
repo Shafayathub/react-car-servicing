@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import logo from '../../../images/logo.png';
 
-const Header = () => {
+const Header = () =>
+{
   const [user] = useAuthState(auth);
 
   console.log(user);
@@ -16,19 +17,19 @@ const Header = () => {
           className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
           to="/"
         >
-          <img className="h-10" src={logo} alt="" />
+          <img className="h-10" src={ logo } alt="" />
         </Link>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
           <Link
             className="mr-5 hover:text-gray-900"
-            to={{ pathname: '/home', hash: '#services' }}
+            to={ { pathname: '/home', hash: '#services' } }
           >
             Services
           </Link>
 
           <Link
             className="mr-5 hover:text-gray-900"
-            to={{ pathname: '/home', hash: '#experts' }}
+            to={ { pathname: '/home', hash: '#experts' } }
           >
             Experts
           </Link>
@@ -36,11 +37,13 @@ const Header = () => {
             About
           </Link>
         </nav>
-        <span className="m-3">{user && <p>{user?.email}</p>}</span>
-        {user?.uid ? (
+        <span className="m-3">{ user && <p>{ user?.email }</p> }</span>
+        <span className="m-3">{ user && <p>{ user?.displayName }</p> }</span>
+        <span className="m-3">{ user && <img className='w-8 rounded-full' src={ user?.photoURL } alt="" /> }</span>
+        { user?.uid ? (
           <Link
             className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 text-blue-500"
-            onClick={() => signOut(auth)}
+            onClick={ () => signOut(auth) }
             to="/"
           >
             Sign Out
@@ -60,7 +63,7 @@ const Header = () => {
               Login
             </Link>
           </div>
-        )}
+        ) }
       </div>
     </header>
   );

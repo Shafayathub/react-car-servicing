@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import auth from '../../firebase.init';
 import login from '../../images/Login.gif';
 import SocialLogin from './SocialLogin/SocialLogin';
@@ -8,6 +13,8 @@ import SocialLogin from './SocialLogin/SocialLogin';
 const Login = () => {
   const [signInWithEmailAndPassword, user, error] =
     useSignInWithEmailAndPassword(auth);
+
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   const emailRef = useRef('');
   const passwordRef = useRef('');
 
@@ -16,6 +23,21 @@ const Login = () => {
   if (user) {
     navigate('/');
   }
+
+  if (sending) {
+    return <p className="text-center mt-5">Sending email...</p>;
+  }
+
+  const resetPassword = async () => {
+    const email = emailRef.current.value;
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast('email sent');
+    } else {
+      toast('Please enter your email address.');
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = emailRef.current.value;
@@ -68,12 +90,25 @@ const Login = () => {
               </small>
             </p>
           </div>
+          <div className="relative mb-4">
+            <p>
+              <small>
+                Forget Passord?
+                <button
+                  onClick={resetPassword}
+                  className="underline text-blue-600 ml-1">
+                  Reset
+                </button>
+              </small>
+            </p>
+          </div>
 
           <input
             type="submit"
             value="Sign in"
             className="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg"
           />
+          <ToastContainer />
           <SocialLogin></SocialLogin>
           <p className="text-xs text-gray-500 mt-3">
             <small>We care about your privacy.</small>

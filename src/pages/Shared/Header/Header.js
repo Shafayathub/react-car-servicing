@@ -22,7 +22,16 @@ const Header = () => {
             to={{ pathname: '/home', hash: '#services' }}>
             Services
           </Link>
-
+          {user && (
+            <Link className="mr-5 hover:text-gray-900" to="/addservice">
+              Add
+            </Link>
+          )}
+          {user && (
+            <Link className="mr-5 hover:text-gray-900" to="/manageservice">
+              Manage
+            </Link>
+          )}
           <Link
             className="mr-5 hover:text-gray-900"
             to={{ pathname: '/home', hash: '#experts' }}>
@@ -32,7 +41,7 @@ const Header = () => {
             About
           </Link>
         </nav>
-        <span className="m-3">{user && <p>{user?.email}</p>}</span>
+        {/* <span className="m-3">{user && <p>{user?.email}</p>}</span> */}
         <span className="m-3">{user && <p>{user?.displayName}</p>}</span>
         <span className="m-3">
           {user && (

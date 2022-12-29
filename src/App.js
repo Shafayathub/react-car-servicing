@@ -8,6 +8,8 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Checkout from './pages/Checkout/Checkout';
 import RequireAuth from './pages/Login/RequireAuth/RequireAuth';
+import AddServices from './pages/Home/Services/AddServices';
+import ManageServices from './pages/ManageServices/ManageServices';
 
 function App() {
   return (
@@ -29,8 +31,21 @@ function App() {
             <RequireAuth>
               <Checkout></Checkout>
             </RequireAuth>
-          }
-        ></Route>
+          }></Route>
+        <Route
+          path="/addservice"
+          element={
+            <RequireAuth>
+              <AddServices></AddServices>
+            </RequireAuth>
+          }></Route>
+        <Route
+          path="/manageservice"
+          element={
+            <RequireAuth>
+              <ManageServices></ManageServices>
+            </RequireAuth>
+          }></Route>
       </Routes>
       <Footer></Footer>
     </div>
